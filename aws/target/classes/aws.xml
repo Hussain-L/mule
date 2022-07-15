@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ca5bad22-8e24-4f8e-9327-a7f97e24ceab" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<global-property doc:name="Global Property" doc:id="d617bcd0-b312-44ec-83c7-ab911b1d4f80" name="env" value="dev" />
+	<flow name="awsFlow" doc:id="ff6f0ad9-9b3d-4247-82a6-b926d33f2a43" >
+		<http:listener doc:name="Listener" doc:id="f9081734-aedb-4a3d-a145-caa9222ac6c6" config-ref="HTTP_Listener_config" path="/api"/>
+		<set-payload value='#["Welcome to Mulesoft"]' doc:name="Set Payload" doc:id="11758b21-0f8d-43e5-ab7b-43d8816236b6" />
+		<logger level="INFO" doc:name="Logger" doc:id="c056002e-ac85-4e16-a432-d3b62d9dabb7" message="#[payload]"/>
+	</flow>
+</mule>
